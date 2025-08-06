@@ -1,0 +1,6 @@
+- Làm sao chúng ta có thể bỏ qua WAF để đưa tải trọng tiêm SQL vào?
+- Đôi khi những thứ kì lạ chẳng hạn như hàm preg_match()
+*: Khi một đầu vào xử lí rất lớn được phân tích cú pháp preg_match() nó sẽ đạt
+đến giới hạn và không thể xử lí yêu cầu được.
+===> Do đó chúng ta có thể bỏ qua biểu thức chính quy bằng cách đưa vào đầu vào
+giá trị hợp lệ lớn !
