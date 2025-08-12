@@ -1,0 +1,13 @@
+use main;
+db.user.insert({"uid": "guest", "upw": "guest", "admin": 0});
+db.user.insert({"uid": "hack", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "apple", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "melon", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "testuser", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "admin", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "aaaa", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "cream", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "berry", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "ice", "upw": "**sample**", "admin": 0});
+db.user.insert({"uid": "panda", "upw": "**sample**", "admin": 0});
+db.user.find();

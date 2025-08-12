@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .container:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            border: 2px dashed #ccc;
+            pointer-events: none;
+        }
+        .note-header {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .note-content {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        .note-footer {
+            text-align: right;
+            font-size: 0.8em;
+            color: #666;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], textarea {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .success {
+            color: #28a745;
+        }
+        .fail {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="note-header">Report</div>
+        <form action="/report" method="post">
+            <input type="text" name="text" placeholder="Enter text for admin" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p>Please enter the text to send to the admin.</p>
+        {% if message %}
+            <div class="note-content">
+                {% if success %}
+                    <p class="success">Success</p>
+                {% else %}
+                    <p class="fail">Fail</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="note-footer">Footer Text</div>
+    </div>
+</body>
+</html>

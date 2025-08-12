@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fancy Web Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        input[type="text"], button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            width: 200px;
+        }
+        .message {
+            margin-top: 20px;
+            color: black;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h2>I've hidden the path of the flag in your session safely.</h2>
+    <h2>Try to read the flag file!</h2>
+    <p></p>
+    <form action="/" method="get">
+        <input type="text" name="path" placeholder="Enter the path" />
+        <button type="submit">Submit</button>
+    </form>
+    <div class="message">{{ msg }}</div>
+</body>
+</html>

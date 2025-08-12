@@ -1,0 +1,25 @@
+FROM python:3.11-alpine
+
+ENV USER chall
+ENV PORT 5000
+
+RUN apk add curl
+
+# Add user
+RUN adduser -D -g "" $USER
+
+# Add files
+COPY --chown=root:root app /app
+COPY --chown=root:root flag /
+
+WORKDIR /app
+RUN chmod 705 run.sh
+RUN pip install -r requirements.txt
+RUN mkdir secrets
+RUN chmod 777 secrets
+
+USER $USER
+EXPOSE $PORT
+
+ENTRYPOINT ["/bin/ash"]
+CMD ["./run.sh"]

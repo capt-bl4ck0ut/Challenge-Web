@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: ./deploy/app
+    networks:
+      - internal
+    ports:
+      - "5000:5000"
+
+networks:
+  internal:

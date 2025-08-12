@@ -1,0 +1,15 @@
+{
+  "name": "Web-C",
+  "version": "1.0.0",
+  "description": "Web-C",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.10.4"
+  }
+}
