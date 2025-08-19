@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% include 'includes/link.html' %}
+	<style>
+		.main{ text-align: center; margin-top: 80px; }
+		.profile{
+			font-family: 'GmarketSansMedium';
+			display: inline-block;
+			width: 600px;
+			border: 1px solid #E5E5E5;
+			height: 500px;
+			padding: 20px;
+			text-align: left;
+		}
+		.profile>img{
+			width: 100px;
+			height: 100px;
+		}
+		.status{
+			border: 1px solid black;
+			padding: 10px;
+		}
+		.status_message{
+			margin-top: 20px;
+		}
+	</style>
+	<title>my page</title>
+</head>
+<body>
+	{% include 'layout/header.html' %}
+	{% include 'includes/alert.html' %}
+	<form method="POST">
+		<input type="hidden" value="{% if username %}{{ username }}{% endif %}" name="username">
+		<input type="hidden" value="{% if image %}{% if image[-20:] == 'jhSfvldYTFYAAAAASUVORK5CYII=' %}/app/static/images/male.png{% endif %}{% if image[-20:] == 'BtZWpzjMgZEAAAAASUVORK5CYII=' %}/app/static/images/female.png{% endif %}{% if image[-20:] == 'KYw5S4w0dLLpKqLjhWf/ALDn/9k=' %}/app/static/images/simple.png{% endif %}{% endif %}" name="image">
+		<textarea style="display:none;">{% if status_message %}{{ status_message }}{% endif %}</textarea>
+		<div class="main">
+			<div class="profile">
+				<img src="data:image/png;base64,{% if image %}{{ image }}{% endif %}">
+				<div class="info">
+					<p><lable>USERNAME : </lable>{% if username %}{{ username }}{% endif %}</p>
+					<p class="status_message">
+						<label>STATUS MESSAGE</label>
+						<pre class="status">{% if status_message %}{{ status_message }}{% endif %}</pre>
+					</p>
+				</div>
+			</div>
+		</div>
+		<input type="submit" name="submit" style="display: none;">
+	</form>
+
+</body>
+</html>

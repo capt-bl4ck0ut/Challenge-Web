@@ -48,7 +48,7 @@ class Exploit:
             return False
 
 if __name__ == "__main__":
-    BASE_URL = "http://127.0.0.1:80"
+    BASE_URL = "http://host8.dreamhack.games:17477"
     ENDPONT = "result.php"
     exploit = Exploit(BASE_URL, ENDPONT)
     exploit.run()

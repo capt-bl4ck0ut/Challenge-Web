@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% include 'includes/link.html' %}
+	<title>index</title>
+	<style>
+		.main{ text-align: center;}
+		.margin-h1{ margin: 50px; }
+	</style>
+</head>
+<body>
+	{% include 'layout/header.html' %}
+	{% include 'includes/alert.html' %}
+
+	<div class="main">
+		<h1 class="margin-h1">
+			{% if username %}
+				Hello {{ username }}!!
+			{% else %}
+				Welcome!
+			{% endif %}
+		</h1>
+	</div>
+</body>
+</html>

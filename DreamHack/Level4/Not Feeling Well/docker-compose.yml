@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  not_feeling_well:
+    build: ./init/
+    container_name: not_feeling_well
+    volumes:
+      - ./app:/app
+    environment:
+      - FLAG=BISC{this_is_fake_flag}
+    ports:
+      - "8080:8080"
+    links:
+      - database
+
+  database:
+    image: mariadb:10.5.13
+    restart: always
+    container_name: not_feeling_well_db
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=14e56fb3cb9e905a08d8dceedd8ae788
+      - TZ=Asia/Seoul
+    command:
+      - --character-set-server=utf8 
+      - --collation-server=utf8_general_ci

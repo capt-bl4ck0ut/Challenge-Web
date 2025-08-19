@@ -1,0 +1,1 @@
+{% with alert = get_flashed_messages() %}{% if alert[0] %}<script>alert('{{ alert[0] }}');location.href='{% if alert[1] %}{{ alert[1] }}{% endif %}';</script>{% endif %}{% endwith %}

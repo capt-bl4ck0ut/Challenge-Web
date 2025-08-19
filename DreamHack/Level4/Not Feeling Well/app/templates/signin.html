@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% include 'includes/link.html' %}
+	<style>
+		@font-face {
+    		font-family: 'GmarketSansMedium';
+    		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    		font-weight: normal;
+   			font-style: normal;
+		}
+		.main{ text-align: center; margin-top: 80px; }
+		.login{
+			display: inline-block;
+			text-align: center;
+			width: 500px;
+			height: 400px;
+			padding: 10px;
+			background: #F6F6F6	;
+		}
+		.login>form{
+			width: 400px;
+			display: inline-block;
+			text-align: center;
+			margin-top: 20px;
+		}
+		label{
+			display: block;
+			margin-top:  20px;
+			margin-bottom: 20px;
+			font-family: 'GmarketSansMedium';
+			font-size: 16px;
+		}
+		input:focus{ outline: none; }
+		input{ font-family: 'GmarketSansMedium'; }
+		input[type=text], input[type=password]{
+			width: 350px;
+			height: 35px;
+			border: 1px solid #D1D1D1;
+			font-size: 20px;
+			border-radius: 4px;
+			padding: 7px;
+		}
+		input[type=submit]{
+			margin-top: 30px;
+			width: 200px;
+			height: 50px;
+			border:  none;
+			border-radius: 2px;
+			background: #A5A5A5;
+			font-size: 25px;
+			color: #fff;
+		}
+		input[type=submit]:hover{ transition: 0.5s; background: #888888; }
+		h1{ font-family: 'GmarketSansMedium'; margin-bottom: 0px; }
+	</style>
+	<title>sign in</title>
+</head>
+<body>
+	{% include 'layout/header.html' %}
+	{% include 'includes/alert.html' %}
+	<div class="main">
+		<div class="login">
+			<h1>SIGN IN</h1>
+			<form action="/signin" method="POST">
+					<label class="username"><input type="text" name="username" placeholder="username"></label>
+					<label class="password"><input type="password" name="password" placeholder="password"></label>
+					<input type="submit" name="submit">
+			</form>
+		</div>
+	</div>
+</body>
+</html>
