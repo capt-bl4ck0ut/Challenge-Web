@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    ports:
+      - "8001:80"
+    depends_on:
+      - db
+  db:
+    image: mariadb:lts
+    command: --default-authentication-plugin=caching_sha2_password
+    environment:
+      MYSQL_DATABASE: dreamhack
+      MYSQL_USER: dreamhack
+      MYSQL_PASSWORD: dreamhack
+      MYSQL_ROOT_PASSWORD: S5tr0ng_Passw0rd1234!@#
+    volumes:
+      - ./deploy/mysql_init:/docker-entrypoint-initdb.d/
+    restart: unless-stopped
+    networks:
+      - default

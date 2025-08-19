@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css')}}">
+</head>
+<body>
+  <h2>Super Simple cURL-based API</h2>
+  <table>
+    <tr>
+      <td><a href="{{ url_for('get_create', simple_token=simple_token) }}">Go to create a post</a></td>
+    </tr>
+    <tr>
+      <td><a href="{{ url_for('get_read', simple_token=simple_token) }}">Go to read posts</a></td>
+    </tr>
+    <tr>
+      <td><a href="{{ url_for('get_update', simple_token=simple_token) }}">Go to update posts</a></td>
+    </tr>
+    <tr>
+      <td><a href="{{ url_for('get_delete', simple_token=simple_token) }}">Go to delete posts</a></td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css')}}">
+</head>
+<body>
+  <h2>Update a post</h2>
+  <form method="post" action="{{ url_for('post_update', simple_token=simple_token) }}">
+    <textarea id="post_idx", name="post_idx" rows="1" cols="40" placeholder="index of a post" maxlength="40" required></textarea><br>
+    <textarea id="author" name="author" rows="1" cols="40" placeholder="author" maxlength="40"></textarea><br>
+    <textarea id="title" name="title" rows="1" cols="40" placeholder="title" maxlength="40"></textarea><br>
+    <textarea id="content" name="content" rows="20" cols="40" placeholder="Content" maxlength="400"></textarea><br>
+    <button type="submit">Update</button>
+    <a href="{{url_for('get_menu', simple_token=simple_token) }}"><button id="cancel" type="submit" form="cancel_button">Cancel</button></a>
+  </form>
+</body>
+</html>

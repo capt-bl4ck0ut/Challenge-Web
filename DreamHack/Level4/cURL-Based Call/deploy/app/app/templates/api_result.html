@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css')}}">
+</head>
+<body>
+  <h2>Result of API call</h2>
+  <pre>
+{{ res }}
+  </pre><br>
+  <a href="{{url_for('get_menu', simple_token=simple_token) }}"><button id="cancel" type="submit" form="cancel_button">Go back</button></a>
+</body>
+</html>

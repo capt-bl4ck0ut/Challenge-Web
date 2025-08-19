@@ -2,7 +2,7 @@ import requests
 import json
 import base64
 
-url = 'http://127.0.0.1/index.php'
+url = 'http://host1.dreamhack.games:14625/index.php'
 payload = {
     "id": "admin",
     "pw": [],

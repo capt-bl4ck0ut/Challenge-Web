@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+
+  todolist:
+    build:
+      context: ./
+      ulimits:
+        nofile:
+          soft: 1048576
+          hard: 1048576
+    ports:
+      - "1337:8080"
+

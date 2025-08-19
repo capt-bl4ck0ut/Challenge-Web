@@ -1,0 +1,45 @@
+<style>
+    .example {
+        background-color: @{o.background_color};
+        color: @{o.text_color};
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+
+<div>
+    <h1>Welcome to Color Palette Generator</h1>
+    <p class="background_color">Background color: @{o.background_color}</p> 
+    <p class="text_color">Text color: @{o.text_color}</p> 
+    <p class="example" id="example">This is an example</p>
+    <button class="button" onclick="changeColor()">Click here to change color</button>
+</div>
+
+<script>
+function getRandomColor() {
+    return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+}
+
+function changeColor() {
+    const newBackground = getRandomColor();
+    const newText = getRandomColor();
+
+    fetch('/change', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            background_color: newBackground,
+            text_color: newText
+        })
+    })
+    .then(response => response.text())
+    .then(result => {
+        document.querySelector('.example').style.backgroundColor = newBackground;
+        document.querySelector('.example').style.color = newText;
+        document.querySelector('.background_color').textContent = `Background color: ${newBackground}`;
+        document.querySelector('.text_color').textContent = `Text color: ${newText}`;
+    });
+}
+</script>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>For Baby</h1>
+  Baby's age: <input id="age" type="text"> <button id="submit">확인</button>
+  <div id="album">
+    <h2 id="msg"></h2>
+  </div>
+  <h3 id="saved"></h3>
+  <button id="save">save</button>
+  <script>
+    const age = document.querySelector('#age');
+    const submit = document.querySelector('#submit');
+    const album = document.querySelector('#album');
+    const msg = document.querySelector('h2');
+    const save = document.querySelector('#save');
+    const saved = document.querySelector('#saved');
+
+    const recommend = (age) => {
+      if (age.match(/[a-zA-Z\\&#;%*$=]/g)) {
+        alert('nope! ⊂(・﹏・⊂)');
+        window.history.back()
+      }
+
+      eval(`msg.innerHTML='This is recommended album for ${age}-year-old.'`);
+
+      const img = document.createElement('img')
+      img.src = 'https://upload.wikimedia.org/wikipedia/en/0/03/Post_Malone_-_Twelve_Carat_Toothache.png';
+
+      album.append(img);
+    }
+
+    submit.addEventListener('click', () => {
+      location.href = `?age=${age.value}`;
+    });
+
+    window.addEventListener('load', () => {
+      const url = new URL(location.href);
+      const urlParams = url.searchParams;
+      if (urlParams.get('age')) {
+        recommend(urlParams.get('age'));
+      }
+    });
+
+    save.addEventListener('click', async () => {
+      const url = new URL(location.href);
+      const urlParams = url.searchParams;
+
+      const res = await fetch('/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          age: urlParams.get('age')
+        }),
+      });
+      const result = await res.text();
+      saved.innerHTML = result;
+    });
+  </script>
+</body>
+
+</html>

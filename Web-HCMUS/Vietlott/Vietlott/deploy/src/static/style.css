@@ -1,0 +1,187 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root {
+  --color-light: white;
+  --color-dark: #212121;
+  --color-signal: #d61818;
+  --color-background: rgb(0, 0, 15);
+  --color-text: var(--color-dark);
+  --color-accent: var(--color-signal);
+  --size-bezel: .5rem;
+  --size-radius: 4px;
+  line-height: 1.4;
+  font-size: calc(.6rem + .4vw);
+}
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    background-color: rgb(0, 0, 15);
+    color: rgba(255, 255, 255, .75);
+}
+.heading {
+    color: rgba(255, 255, 255, .75);
+}
+.check {
+    text-decoration: none;
+}
+.container {
+    display: flex;
+}
+.num,.num.incorrect {
+    color: #fff;
+    background-color: transparent;
+    width: 100px;
+    text-align: center;
+    outline: none;
+    padding: 2rem 1rem;
+    margin: 0 1rem;
+    font-size: 3rem;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: .5rem;
+    color: rgba(255, 0, 0, .5) !important;
+}
+
+.num,.num.incorrect:focus,
+.num,.num.incorrect:valid {
+    box-shadow: 0 0 .5rem rgba(255, 0, 0, .5),
+                inset 0 0 .5rem rgba(255, 0, 0, .5);
+    border-color: rgba(255, 0, 0, .5);
+}
+.num.correct {
+    color: #fff;
+    background-color: transparent;
+    width: 100px;
+    text-align: center;
+    outline: none;
+    padding: 2rem 1rem;
+    margin: 0 1rem;
+    font-size: 3rem;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: .5rem;
+    color: rgba(0, 255, 0, .5) !important;
+}
+
+.num.correct:focus,
+.num.correct:valid {
+    box-shadow: 0 0 .5rem rgba(0, 255, 0, .5),
+                inset 0 0 .5rem rgba(0, 255, 0, .5);
+    border-color: rgba(0, 255, 0, .5);
+}
+.inp-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.input {
+  position: relative;
+}
+.input__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * .5);
+  margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .5);
+  background: pink;
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background: var(--color-background);
+  transition: transform 120ms ease-in;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.input__field {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 3px solid rgba(255, 255, 255, .3);
+  padding: calc(var(--size-bezel) * 1.5) var(--size-bezel);
+  color: currentColor;
+  background: transparent;
+  border-radius: var(--size-radius);
+  max-width: 30rem;
+  min-width: 20rem;
+  margin-bottom: 4em;
+}
+.input__field:not(:-moz-placeholder-shown) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.input__field:not(:-ms-input-placeholder) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.input__field:focus + .input__label, .input__field:not(:placeholder-shown) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.button-19 {
+  appearance: button;
+  background-color: #d61818;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  background-color: #f42525;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-19:main,
+.button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.button-19:disabled {
+  cursor: auto;
+}
+
+.button-19:active {
+  border-width: 4px 0 0;
+  background: none;
+}

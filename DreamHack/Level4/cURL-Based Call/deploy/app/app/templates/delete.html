@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css')}}">
+</head>
+<body>
+  <h2>Delete a post</h2>
+  <form method="post" action="{{ url_for('post_delete', simple_token=simple_token) }}">
+    <textarea id="post_idx", name="post_idx" rows="1" cols="40" placeholder="index of a post" maxlength="40" required></textarea><br>
+    <button id="post" type="submit">Delete</button>
+    <a href="{{url_for('get_menu', simple_token=simple_token) }}"><button id="cancel" type="submit" form="cancel_button">Cancel</button></a>
+  </form>
+</body>
+</html>

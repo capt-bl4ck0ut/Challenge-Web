@@ -1,0 +1,14 @@
+FROM node
+
+RUN mkdir -p /app
+RUN echo 'BISC{fake flag}' > /flag
+
+WORKDIR /app
+
+COPY ./ /app
+
+RUN npm install
+
+EXPOSE 8000
+
+CMD ["npm","start"]

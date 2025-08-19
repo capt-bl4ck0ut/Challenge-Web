@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💬 Vibe Chat Room 💬</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <span class="chat-title">🚀 Welcome to Vibe Chat Room! 🎉</span>
+        </div>
+        <div class="messages" id="messages">
+            <!-- Messages will be displayed here -->
+        </div>
+        <form id="message-form" class="form" action="" method="POST">
+            <input type="text" id="message-input" placeholder="Type your message here..." required>
+            <button type="submit">Send 💌</button>
+        </form>
+    </div>
+
+    <div id="image-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(30,40,60,0.85); align-items:center; justify-content:center; z-index:1000;">
+        <img id="modal-img" src="" alt="Full Image" style="max-width:90vw; max-height:90vh; border-radius:16px; box-shadow:0 8px 32px #22577a;">
+    </div>
+
+    <script>
+        const form = document.getElementById('message-form');
+        const messagesDiv = document.getElementById('messages');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const input = document.getElementById('message-input');
+            const message = input.value;
+            input.value = '';
+
+            // Show the user's message immediately
+            const messageElement = document.createElement('div');
+            messageElement.className = "message-bubble";
+            messageElement.textContent = message;
+            messagesDiv.appendChild(messageElement);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            // Send message to backend for embedding images
+            const response = await fetch('/send_message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.html && data.html.trim() !== message) {
+                    messageElement.innerHTML = data.html;
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                }
+                // Show bot loading effect first
+                if (data.bot) {
+                    const botElement = document.createElement('div');
+                    botElement.className = "message-bubble bot";
+                    botElement.innerHTML = `<span class="bot-loading"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>`;
+                    messagesDiv.appendChild(botElement);
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                    // Random loading time between 600ms and 1600ms
+                    const loadingTime = 600 + Math.random() * 1000;
+                    setTimeout(() => {
+                        botElement.textContent = data.bot;
+                        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                    }, loadingTime);
+                }
+            }
+        });
+
+        // Popup logic for embedded images
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('embedded-image')) {
+                const modal = document.getElementById('image-modal');
+                const modalImg = document.getElementById('modal-img');
+                modalImg.src = e.target.src;
+                modal.style.display = 'flex';
+                modal.classList.add('show');
+                modalImg.style.animation = 'none';
+                // Restart image animation
+                modalImg.style.animation = '';
+                modalImg.style.opacity = '0';
+                modalImg.style.transform = 'scale(0.85)';
+                setTimeout(() => {
+                    modalImg.style.animation = 'popupImg 0.25s forwards';
+                    modalImg.classList.add('grab');
+                }, 10);
+            }
+            // Close modal if background is clicked (but not when clicking the image)
+            if (e.target.id === 'image-modal') {
+                e.target.style.display = 'none';
+                e.target.classList.remove('show');
+                const modalImg = document.getElementById('modal-img');
+                modalImg.src = '';
+                modalImg.classList.remove('grab');
+            }
+        });
+
+        const modalImg = document.getElementById('modal-img');
+        let zoomLevel = 1;
+        let isPanning = false;
+        let startX = 0, startY = 0;
+        let originX = 0, originY = 0;
+
+        modalImg.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                zoomLevel = Math.min(zoomLevel + 0.1, 5);
+            } else {
+                zoomLevel = Math.max(zoomLevel - 0.1, 0.2);
+            }
+            if (zoomLevel >= 0.2) {
+                modalImg.classList.add('grab');
+            } else {
+                modalImg.classList.remove('grab');
+                originX = 0;
+                originY = 0;
+            }
+            modalImg.style.setProperty('transform', `scale(${zoomLevel}) translate(${originX}px, ${originY}px)`, 'important');
+        });
+
+        // Mouse events for panning
+        modalImg.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            if (zoomLevel >= 0.2) {
+                isPanning = true;
+                startX = e.clientX;
+                startY = e.clientY;
+                modalImg.classList.add('grabbing');
+            }
+        });
+        document.addEventListener('mousemove', function(e) {
+            e.preventDefault();
+            if (isPanning) {
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                modalImg.style.setProperty('transform', `scale(${zoomLevel}) translate(${originX + dx}px, ${originY + dy}px)`, 'important');
+            }
+        });
+        document.addEventListener('mouseup', function(e) {
+            e.preventDefault();
+
+            if (isPanning) {
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                originX += dx;
+                originY += dy;
+                isPanning = false;
+                modalImg.classList.remove('grabbing');
+            }
+        });
+
+        // Touch events for panning (mobile)
+        modalImg.addEventListener('touchstart', function(e) {
+            if (zoomLevel >= 0.2 && e.touches.length === 1) {
+                isPanning = true;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }
+        });
+        modalImg.addEventListener('touchmove', function(e) {
+            if (isPanning && e.touches.length === 1) {
+                const dx = e.touches[0].clientX - startX;
+                const dy = e.touches[0].clientY - startY;
+                modalImg.style.setProperty('transform', `scale(${zoomLevel}) translate(${originX + dx}px, ${originY + dy}px)`, 'important');
+                e.preventDefault();
+            }
+        });
+        modalImg.addEventListener('touchend', function(e) {
+            if (isPanning) {
+                const dx = e.changedTouches[0].clientX - startX;
+                const dy = e.changedTouches[0].clientY - startY;
+                originX += dx;
+                originY += dy;
+                isPanning = false;
+            }
+        });
+
+        // Reset zoom and pan when modal is closed or image is opened
+        document.getElementById('image-modal').addEventListener('click', function(e) {
+            if (e.target.id === 'image-modal') {
+                zoomLevel = 1;
+                originX = 0;
+                originY = 0;
+                modalImg.style.transform = 'scale(1)';
+                modalImg.classList.remove('grab', 'grabbing');
+            }
+        });
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('embedded-image')) {
+                zoomLevel = 1;
+                originX = 0;
+                originY = 0;
+                modalImg.style.transform = 'scale(1)';
+                modalImg.classList.remove('grab', 'grabbing');
+            }
+        });
+    </script>
+</body>
+</html>

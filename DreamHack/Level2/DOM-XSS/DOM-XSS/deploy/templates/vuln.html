@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+
+{% block content %}
+
+  <script nonce={{ nonce }}>
+    window.addEventListener("load", function() {
+      var name_elem = document.getElementById("name");
+      name_elem.innerHTML = `${location.hash.slice(1)} is my name !`;
+    });
+ </script>
+  {{ param | safe }}
+  <pre id="name"></pre>
+{% endblock %}

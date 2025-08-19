@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - door
+    networks:
+      - internal
+    restart: always
+  door:
+    build:
+      context: ./door
+      dockerfile: Dockerfile
+    depends_on:
+      - flag-vault
+      - key-vault
+    networks:
+      - internal
+    restart: always
+  
+  flag-vault:
+    build:
+      context: ./flag-vault
+      dockerfile: Dockerfile
+    networks:
+      - internal
+    restart: always
+
+  key-vault:
+    build:
+      context: ./key-vault
+      dockerfile: Dockerfile
+    networks:
+      - internal
+    restart: always
+
+networks:
+  internal:
+    driver: bridge

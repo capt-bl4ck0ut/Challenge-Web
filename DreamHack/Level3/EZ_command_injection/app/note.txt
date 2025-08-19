@@ -1,0 +1,20 @@
+Kiến thức mới OS Command
+
+addr = ipaddress.ip_address(host)
+cmd = f'ping -c 3 {addr}'
+subprocess.check_output(['/bin/sh', '-c', cmd], timeout=8)
+
+ở đây nó không phải lấy IP trực tiếp mà kiểm tra thông qua ip_address nó sẽ chặn được
+các payload như 8.8.8.8;id dạng thô
+
+Một khi ipaddress parse thành công, giá trị addr là một object IPAddress.
+
+Chúng ta có thể bypass bằng cách sử dụng IPv6 cho phép "Zone Index": 
+
+fe80::1%eth0
+Trong shell % có thể được expand bởi một số shell nếu ta encode newline sẽ thực thi
+tiếp lệnh khác
+
+Ví dụ: fe80::1%0; id → nếu ipaddress parse được, phần %0; id có thể inject lệnh.
+
+%0 là phần Zone Index hợp lệ trong IPV6 notation

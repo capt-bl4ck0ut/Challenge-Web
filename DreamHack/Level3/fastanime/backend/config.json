@@ -1,0 +1,4 @@
+{
+    "SECRET_KEY": "this_is_very_secret_key",
+    "ADMIN_PASSWORD": "this_is_admin_password"
+}

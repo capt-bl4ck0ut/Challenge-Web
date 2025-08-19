@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anime Image Generator</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="gen.css">
+</head>
+<body>
+    <div class="sparkles">
+        <div class="sparkle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="sparkle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="sparkle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="sparkle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="sparkle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="sparkle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="sparkle" style="left: 70%; animation-delay: 6s;"></div>
+        <div class="sparkle" style="left: 80%; animation-delay: 1.5s;"></div>
+        <div class="sparkle" style="left: 90%; animation-delay: 2.5s;"></div>
+    </div>
+
+    <a href="/" class="home-link">🏠 Home</a>
+
+    <div class="header">
+        <h1 class="title">🎨 Anime Art Gallery</h1>
+    </div>
+
+    <div class="buttons">
+        <button class="gen-button" onclick="location.href='/gen?count=5'">✨ Generate 5 Images</button>
+        <button class="gen-button" onclick="location.href='/gen?count=10'">🌟 Generate 10 Images</button>
+        <button class="gen-button" onclick="location.href='/gen?count=15'">🎭 Generate 15 Images</button>
+    </div>
+
+    <% if (typeof m !== 'undefined' && m.length > 0) { %>
+        <div class="grid">
+            <% let imageCount = 0; %>
+            <% m.forEach(row => { %>
+                <% row.forEach(img => { %>
+                    <% imageCount++; %>
+                    <div class="image-container">
+                        <img src="<%= img %>" alt="Generated Anime Image <%= imageCount %>">
+                        <div class="image-overlay">Anime #<%= imageCount %></div>
+                    </div>
+                <% }) %>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="loading">
+            🎨 Click a button above to generate amazing anime images! 🌸
+        </div>
+    <% } %>
+</body>
+</html>
