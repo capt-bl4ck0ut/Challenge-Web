@@ -1,0 +1,15 @@
+{% include 'fragments/header.html' %}
+{% block content %}
+<div class="container mt-2">
+    <h1>Tw2t 신고하기</h1>
+    <form action="/post/report/{{ post['id'] }}" method="post">
+        <div class="mb-3">
+            <label for="report_reason" class="form-label">사유를 작성해주세요.</label>
+            <textarea class="form-control" id="report_reason" name="report_reason" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-danger">신고하기</button>
+        <a class="btn btn-secondary" href="/post/{{ post['id'] }}" role="button">취소</a>
+    </form>
+</div>
+{% endblock %}
+{% include 'fragments/footer.html' %}

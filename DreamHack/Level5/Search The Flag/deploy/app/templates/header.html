@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="static/css/login.css"> -->
+    <link rel="stylesheet" href="static/css/default.css">
+    <link rel="stylesheet" href="static/css/search.css">
+    <link rel="stylesheet" href="static/css/report.css">
+    <!-- <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/hair.css"> -->
+</head>
+
+<body>
+    <header>
+        <h1>Search The Flag</h1>
+        <nav>
+            <ul>
+                {% if session["username"] %}
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
+                {% endif %}
+                <li><a href="/search">Search</a></li>
+                <li><a href="/report">Report</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <script>alert("{{message}}")</script>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}

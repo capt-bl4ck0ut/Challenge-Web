@@ -1,0 +1,4 @@
+flask==2.3.3
+PyMySQL==1.1.0
+selenium==4.15.1
+promise==2.3

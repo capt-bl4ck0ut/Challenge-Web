@@ -1,0 +1,19 @@
+{% include 'fragments/header.html' %}
+{% block content %}
+<div class="container mt-2">
+    <h1>가입하기</h1>
+    <form action="/auth/register" method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">가입하기</button>
+        <a class="btn btn-secondary" href="/auth/login" role="button">로그인하러 가기</a>
+    </form>
+</div>
+{% endblock %}
+{% include 'fragments/footer.html' %}

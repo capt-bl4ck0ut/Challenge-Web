@@ -1,0 +1,33 @@
+{% include 'fragments/header.html' %}
+{% block content %}
+<div class="container mt-2">
+    <h1>타임라인</h1>
+    <div class="card mb-1">
+        <div class="card-body new-post">
+            <a class="btn btn-outline-secondary" href="/post/create" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+            </a>
+            무슨 일이 일어나고 있나요?
+        </div>
+    </div>
+    <div class="card list">
+        {% for post in posts %}
+        {% if post['hidden'] %}
+        <div class="card-body list-item card-body-hidden">
+        {% else %}
+        <div class="card-body list-item">
+        {% endif %}
+            <a href="/post/{{ post['id'] }}">
+                <div class="title">
+                    {{ post['title'] }}
+                </div>
+            </a>
+            <p>by {{ post['author'] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% include 'fragments/footer.html' %}

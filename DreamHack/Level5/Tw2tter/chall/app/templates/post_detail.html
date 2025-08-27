@@ -1,0 +1,25 @@
+{% include 'fragments/header.html' %}
+{% block content %}
+<div class="container mt-2">
+    <div class="post-detail">
+        <div class="title">
+            {{ post['title'] }}
+        </div>
+        <div class="content">
+            {{ post['content'] }}
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/post" role="button">타임라인</a>
+            {% if is_editable %}
+            {% if post['hidden'] %}
+            <a class="btn btn-secondary" href="/post/unhide/{{ post['id'] }}" role="button">글 공개하기</a>
+            {% else %}
+            <a class="btn btn-secondary" href="/post/hide/{{ post['id'] }}" role="button">글 숨기기</a>
+            {% endif %}
+            {% endif %}
+            <a class="btn btn-danger" href="/post/report/{{ post['id'] }}" role="button">신고하기</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% include 'fragments/footer.html' %}

@@ -1,0 +1,19 @@
+{% include 'fragments/header.html' %}
+{% block content %}
+<div class="container mt-2">
+    <h1>글 작성하기</h1>
+    <form action="/post/create" method="post">
+        <div class="mb-3">
+            <label for="post_title" class="form-label">제목</label>
+            <input type="text" class="form-control" name="title" required>
+        </div>
+        <div class="mb-3">
+            <label for="post_content" class="form-label">글 내용</label>
+            <textarea class="form-control" name="content" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">작성하기</button>
+        <a class="btn btn-secondary" href="/post" role="button">취소</a>
+    </form>
+</div>
+{% endblock %}
+{% include 'fragments/footer.html' %}

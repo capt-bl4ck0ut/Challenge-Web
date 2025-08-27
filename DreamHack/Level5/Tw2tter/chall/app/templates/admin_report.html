@@ -1,0 +1,24 @@
+{% include 'fragments/header.html' %}
+{% block content %}
+<div class="container mt-2">
+    <h1>신고된 Tw2t</h1>
+    <div class="card list">
+        {% for report, post in zip_reports_posts %}
+        <div class="card-body list-item">
+            <a href="/post/{{ post['id'] }}">
+                <div class="title">
+                    {{ post['title'] }} | written by {{ post['author'] }}
+                </div>
+            </a>
+            <p>
+                reporter: {{ report['reporter'] }} <br>
+                reason: {{ report['reason'] }} <br>
+            </p>
+            <a class="btn btn-danger" href="/admin/report/accept/{{ report['id'] }}" role="button">Tw2t 삭제하기</a>
+            <a class="btn btn-secondary" href="/admin/report/decline/{{ report['id'] }}" role="button">넘기기</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% include 'fragments/footer.html' %}

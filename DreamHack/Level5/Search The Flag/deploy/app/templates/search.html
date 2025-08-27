@@ -1,0 +1,35 @@
+{% include "header.html" %}
+
+{% block content %}
+<div class="comment">
+    <h3>Can you search the flag????</h3>
+</div>
+<section class="search-container">
+    <form action="/search" method="get">
+        <div class="search-box">
+            <input type="text" class="search-input" id="keyword" name="keyword" placeholder="Search...">
+            <button class="search-button">Search</button>
+        </div>
+    </form>
+</section>
+{% if msg %}
+<div class="result-message">
+    <p>{{msg}}</p>
+</div>
+{% endif %}
+{% if sentence_list %}
+<div class="sentence-list">
+    <h2>Search Results:</h2>
+    <ul>
+        {% for sentence in sentence_list %}
+        <li>{{ sentence }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
+
+
+</body>
+
+</html>

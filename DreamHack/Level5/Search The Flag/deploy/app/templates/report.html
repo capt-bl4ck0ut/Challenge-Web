@@ -1,0 +1,28 @@
+{% include "header.html" %}
+
+{% block content %}
+<div class="comment">
+</div>
+<section class="search-container">
+    <form action="/report" method="post">
+        <div class="search-box">
+            <input type="text" class="search-input" id="path" name="path" placeholder="/example/asdfgh">
+            <button class="search-button">Report</button>
+        </div>
+    </form>
+</section>
+{% if msg=="success" %}
+<div class="success-message">
+    <p>{{msg}}</p>
+</div>
+{% elif msg=="fail" %}
+<div class="fail-message">
+    <p>{{msg}}</p>
+</div>
+{% endif %}
+{% endblock %}
+
+
+</body>
+
+</html>

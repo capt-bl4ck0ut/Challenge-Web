@@ -1,0 +1,41 @@
+.list-item .title {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #3f3f3f;
+    word-break: break-all
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #f2f4f6;
+}
+
+.new-post {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.container {
+    background-color: #f2f4f6;
+}
+
+.post-detail .title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #3f3f3f;
+    word-break: break-all
+}
+
+.post-detail .content {
+    margin: 1.5rem 0;
+    word-break: break-all
+}
+
+.card-body-hidden {
+    background-color: #e7e7e7;
+}
