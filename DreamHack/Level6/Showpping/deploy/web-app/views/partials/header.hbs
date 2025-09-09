@@ -1,0 +1,15 @@
+  <header>
+    <h1>My Flag Shop</h1>
+    <nav>
+      <ul>
+      {{#if name}}
+        <li><button onclick="location.href='/mypage'" >Mypage</button></li>
+      {{else}}
+        <li><button onclick="location.href='/login'">Login</button></li>
+      {{/if}}
+        <li><button onclick="location.href='/coupon/register'">Register Coupon</button></li>
+        <li><button onclick="location.href='/coupon/use'">Use Coupon</button></li>
+        <li><button onclick="location.href='/'">Home</button></li>
+      </ul>
+    </nav>
+  </header>

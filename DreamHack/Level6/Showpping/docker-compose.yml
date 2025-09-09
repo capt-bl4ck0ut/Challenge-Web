@@ -1,0 +1,13 @@
+services:
+  web-app:
+    build:
+      context: ./deploy/web-app
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  coupon-app:
+    build:
+      context: ./deploy/coupon-app
+    depends_on:
+      - web-app

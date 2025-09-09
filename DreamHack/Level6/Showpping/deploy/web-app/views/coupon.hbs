@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="coupon-form">
+        {{#if endpoint}}
+            <h3>Register Coupon</h3>
+            <form action="/coupon/{{endpoint}}" method="post">
+        {{else}}
+            <h3>Use Coupon</h3>
+            <form action="/coupon/use" method="post">
+        {{/if}}
+        <input type="text" name="coupon" placeholder="Enter coupon code">
+        <button type="submit">Apply Coupon</button>
+        {{#if msg}}
+            <p class="message">{{msg}}</p>
+        {{/if}}
+            </form>
+    </div>
+</div>

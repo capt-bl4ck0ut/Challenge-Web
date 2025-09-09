@@ -1,0 +1,15 @@
+<div class="container">
+  {{#each products}}
+    <div class="product">
+      <h3>{{this.product_name}}</h3>
+      <img src="{{this.img_path}}" alt="{{this.name}}">
+      <p>Price: {{this.price}} won</p>
+      {{#if this.flag}}
+          <button onclick="location.href='/purchase/{{this.id}}'">Member Purchase</button>
+      {{else}}
+          <button onclick="location.href='/purchase/{{this.id}}'">Member Purchase</button>
+          <button onclick="location.href='/purchase/non/{{this.id}}'">Non-member Purchase</button>
+      {{/if}}
+    </div>
+  {{/each}}
+</div>

@@ -15,7 +15,6 @@ def sha256_hash(text):
     sha256.update(text_bytes)
     hash_hex = sha256.hexdigest()
     return hash_hex
-
 isSafe = False
 def check_ssrf(url,checked):
     global isSafe
@@ -66,11 +65,11 @@ def check_ssrf(url,checked):
                     return "fail"
                 check_ssrf(redirect_url,checked + 1) # 리다이렉션 횟수를 카운팅함과 동시에 안전한 지 확인합니다.
         except:
-            print("URL 요청에 실패했습니다.")
+            print("Yêu cầu URL không thành công.")
             isSafe = False
             return "Fail"
         if isSafe == True:
-            print("URL 등록에 성공했습니다.")
+            print("Đăng ký URL đã thành công.")
             return "SUCCESS"
         else:
             return "Fail"

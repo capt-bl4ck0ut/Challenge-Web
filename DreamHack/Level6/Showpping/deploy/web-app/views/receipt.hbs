@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .receipt-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        h2, p {
+            color: #333;
+        }
+        .item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container">
+        <h2>Receipt</h2>
+        <p><strong>Name:</strong> {{name}}</p>
+        <p><strong>Email:</strong> {{email}}</p>
+        <p><strong>Address:</strong> {{{address}}}</p>
+
+        <h3>Purchased Product:</h3>
+
+            <div class="item">
+                <span>{{product.product_name}} - ${{product.price}}</span>
+            </div>
+
+    </div>
+</body>
+</body>
+</html>
