@@ -1,0 +1,6 @@
+services:
+  app:
+    container_name: freemarket-app
+    build: .
+    ports: 
+     - "8080:8080"

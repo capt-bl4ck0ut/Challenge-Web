@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경로 신고 :: 관리자 시스템</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .page-title {
+            color: #2c3e50;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        p {
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            padding: 12px 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+        .message.success {
+            background-color: #d1e7dd;
+        }
+        .message.fail {
+            background-color: #f8d7da;
+            color: #842029;
+            border-color: #f5c2c7;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .page-title {
+                font-size: 26px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            input[type="text"], button[type="submit"] {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">경로 확인 및 신고</h1>
+
+    <div id="report-status" class="container">
+        <h2>신고 처리 결과</h2>
+        {% if msg is defined and msg %}
+            <p class="message {{ msg }}">
+                {% if msg == 'success' %}
+                    <strong>성공:</strong> 요청하신 URL 경로를 정상적으로 확인했습니다.
+                {% elif msg == 'fail' %}
+                    <strong>실패:</strong> URL 경로를 확인하지 못했거나, 유효하지 않은 경로 또는 입력값이 없습니다.
+                {% else %}
+                    {{ msg }}
+                {% endif %}
+            </p>
+        {% else %}
+            <p>현재 처리 대기 중이거나 이전 작업 결과가 없습니다.</p>
+        {% endif %}
+
+        <p><strong>누적 신고 처리 건수:</strong> {{ report_count if report_count is defined else 0 }} (35건마다 초기화)</p>
+    </div>
+
+    <form action="/report" method="post" class="container">
+        <h2>새로운 경로 신고</h2>
+        <div>
+            <label for="path-input">확인할 내부 경로 입력:</label>
+            <input type="text" name="path" id="path-input" placeholder="예: /admin 또는 /secret?secret_token=abcdef12345" required>
+        </div>
+        <button type="submit">경로 확인 요청</button>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai_Hoshino</title>
+</head>
+<body>
+    <div secret_token="{{secret_token}}" id="secret_token">
+    <style></style>
+    </div>
+    <script>
+        let params = new URLSearchParams(window.location.search);
+        let css = params.get('css');
+        document.querySelector('style').textContent = css;
+        const secret_token = document.getElementById('secret_token');   
+        const secret_tokenShadowRoot = secret_token.attachShadow({ mode: 'closed' });
+        while (secret_token.firstChild) {
+            secret_tokenShadowRoot.appendChild(secret_token.firstChild);
+        }
+    </script>
+</body>
+</html>
