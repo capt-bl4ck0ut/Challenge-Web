@@ -1,0 +1,13 @@
+services:
+  web_safe-upload:
+    ports:
+      - "${DYNAMIC_PORT:-8001}:80"
+    build: .
+    image: forez/web-safe-upload:latest
+    restart: unless-stopped
+    networks:
+      - web_safe-upload_network
+
+networks:
+  web_safe-upload_network:
+    driver: bridge
