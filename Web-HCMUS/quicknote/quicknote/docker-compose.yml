@@ -1,9 +1,0 @@
-services:
-  quicknote:
-    build: .
-    ports:
-      - "1337:80"
-    environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html
-      - PREMIUM_KEY=HCMUS-CTF{FAKE_FLAG_FAKE_FLAG}
-    restart: unless-stopped
