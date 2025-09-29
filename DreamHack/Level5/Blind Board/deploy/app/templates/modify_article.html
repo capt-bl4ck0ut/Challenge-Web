@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    body {
+      background-color: #000000;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+    }
+    #content {
+      background-color: #000000;
+      border-color: #00FF00;
+      border-width: 2px;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+    }
+    #cancel {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 6em;
+      height: 2.0em;
+    }
+    #modify {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 6em;
+      height: 2.0em;
+    }
+    #title {
+      background-color: #000000;
+      border-color: #00FF00;
+      border-width: 2px;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome My Blind Board :)</td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr align=center>
+        <th width=100>Modify a article</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <form method="post" action="modify_article">
+            <input type="hidden" name="article_id" value="{{article_id}}">
+            <div id="title_section">
+              <textarea id="title" name="title" rows="1" cols="58" paceholder="Title" maxlength="80" required>{{title}}</textarea>
+            </div>
+            <div id="content_section">
+              <textarea id="content" name="content" rows="20" cols="58" paceholder="Content" maxlength="4000" required>{{content}}</textarea>
+            </div>
+            <div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="modify" type="submit">Modify</button>
+              <button id="cancel" type="submit" form="cancel_button">Cancel</button>
+            </div>
+          </form>
+          <form id="cancel_button" method="get" action="/board/{{article_id}}">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

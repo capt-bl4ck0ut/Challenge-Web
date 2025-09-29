@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    body {
+      background-color: #000000;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+    }
+    #modify {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 6em;
+      height: 2.0em;
+    }
+    #delete {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 6em;
+      height: 2.0em;
+    }
+    #go_back {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 6em;
+      height: 2.0em;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome My Blind Board :)</td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr>
+        <td width=100>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View a article</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div>
+            <h4>Title</h4>
+            {{title}}
+          </div>
+          <div id="content_section">
+            <h4>Content</h4>
+            <p>{{content}}</p>
+          </div>
+          <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="modify" type="submit" form="modify_button">Modify</button>
+            <button id="delete" type="submit" form="delete_button">Delete</button>
+            <button id="go_back" type="submit" form="go_back_button">Go back</button>
+          </div>
+          <form id="modify_button" method="post" action="/modify_article">
+            <input type="hidden" name="article_id" value="{{article_id}}">
+          </form>
+          <form id="delete_button" method="post" action="/delete_article">
+            <input type="hidden" name="article_id" value="{{article_id}}">
+          </form>
+          <form id="go_back_button" method="get" action="/board">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

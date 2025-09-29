@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    a:link {
+      color: #00FF00;
+    }
+    a:visited {
+      color: #00FF00;
+    }
+    a:hover {
+      color: #FCFC0C;
+    }
+    a:active {
+      color: #00FF00;
+    }
+    body {
+      background-color: #000000;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+    }
+    #write {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 6em;
+      height: 2.0em;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome My Blind Board :)</td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr align=center>
+        <th width=100>Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for idx, title in ret %}
+      <tr align=center>
+        <td><a href="/board/{{idx}}">{{title}}</a></td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td>
+          <a href="/board?page={{page - 1}}">Previous page</a> <a href="/board?page={{page + 1}}">Next page</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button type="submit" id="write" form="write_button">Write</button>
+          <form id="write_button" method="post" action="/write_article">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

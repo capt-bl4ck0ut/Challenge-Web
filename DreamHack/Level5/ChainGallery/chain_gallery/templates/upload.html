@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain Gallery</title>
+</head>
+<body>
+    <h1>Upload Files</h1>
+    {% if success %}
+        <p>Files uploaded successfully!</p>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_files">Select files:</label>
+        <input type="file" name="files" multiple="" accept="image/*" required="" id="id_files">
+        <button type="submit">Upload</button>
+    </form>>
+    </form>
+</body>
+</html>

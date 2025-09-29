@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    body {
+      background-color: #000000;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+    }
+    #yes {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 10em;
+      height: 2.0em;
+    }
+    #no {
+      background-color: Transparent;
+      color: #00FF00;
+      font-family: "Monaco", "Lucida Console", "Courier New", monospace;
+      width: 10em;
+      height: 2.0em;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome My Blind Board :)</td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+      <tr align=center>
+        <th width=100>Delete a article</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div>
+            <h4>Are you sure you want to delete?</h4>
+          <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="yes" type="submit" form="yes_button">Yes</button>
+            <button id="no" type="submit" form="no_button">No</button>
+          </div>
+          <form id="yes_button" method="post" action="/delete_article">
+            <input type="hidden" name="article_id" value="{{article_id}}">
+            <input type="hidden" name="answer" value="y">
+          </form>
+          <form id="no_button" method="get" action="/board/{{article_id}}">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>===================================================</td>
+      </tr>
+</body>
+</html>

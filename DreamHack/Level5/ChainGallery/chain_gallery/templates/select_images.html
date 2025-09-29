@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Images and Options</title>
+    <style>
+        /* Basic styling for checkboxes and images */
+        .image-select { display: inline-block; margin: 10px; text-align: center; }
+        .operations { margin: 15px; }
+    </style>
+    <script>
+        function generateExpression() {
+            const operation = document.querySelector('input[name="operation"]:checked').value;
+            const selectedImages = document.querySelectorAll('input[name="selected_images"]:checked');
+
+            if (selectedImages.length < 2) {
+                alert("Please select at least two images for the operation.");
+                return;
+            }
+
+            let imageVars = Array.from(selectedImages).map((img) => img.value.split('.')[0]);
+            let expression = '';
+            if (operation === 'abs') {
+                for (let i = 0; i < selectedImages.length; i += 2) {
+                    if (i + 1 < selectedImages.length) {
+                    expression += `(${imageVars[i]} - ${imageVars[i + 1]})`;
+                    if (i + 2 < selectedImages.length) {
+                        expression += (i % 4 === 0 ? ' + ' : ' - ');
+                    }
+                    } else {
+                        expression += `(${imageVars[i]})`;
+                    }
+                }
+                expression = `convert(abs(${expression}), 'L')`;
+            } else {
+                expression = imageVars.reduce((acc, curr) => {
+                    return acc ? `${operation}(${acc}, ${curr})` : curr;
+                }, '');
+                expression = `convert(${expression}, 'L')`;
+            }
+            document.getElementById('expression').value = expression;
+            document.getElementById('processForm').submit();
+        }
+    </script>
+</head>
+<body>
+    <h2>Select Images to Process</h2>
+    <form id="processForm" method="POST" action="{% url 'process_images' %}">
+        {% csrf_token %}
+
+        {{ test }}
+        {% for image in image_paths %}
+            <div class="image-select">
+                <img src="/uploads/{{ image }}" alt="Image" width="100"><br>
+                <input type="checkbox" name="selected_images" value="{{ image }}"> {{ image }}
+            </div>
+        {% endfor %}
+
+        <div class="operations">
+            <h3>Select Operation</h3>
+            <label><input type="radio" name="operation" value="min"> Minimum</label>
+            <label><input type="radio" name="operation" value="max"> Maximum</label>
+            <label><input type="radio" name="operation" value="abs"> Absolute Difference</label>
+        </div>
+
+        <input type="hidden" name="expression" id="expression">
+        <button type="button" onclick="generateExpression()">Process Images</button>
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    {% if success %}
+        <p>Image generate successfully!</p>
+    {% endif %}
+
+    {% if output_image %}
+        <h3>Processed Image:</h3>
+        <img src="/uploads/results/{{ output_image }}" alt="Result Image">
+    {% endif %}
+</body>
+</html>

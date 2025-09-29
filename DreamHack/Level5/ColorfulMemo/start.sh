@@ -1,0 +1,1 @@
+docker run --name colorfulmemo -d -p 80:80 colorfulmemo
