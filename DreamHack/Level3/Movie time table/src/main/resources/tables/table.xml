@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+    <movie>
+        <title>The Shawshank Redemption</title>
+        <showtimes>
+            <showtime>10:00 AM</showtime>
+            <showtime>1:00 PM</showtime>
+            <showtime>4:00 PM</showtime>
+        </showtimes>
+    </movie>
+    <movie>
+        <title>Life Is Beautiful</title>
+        <showtimes>
+            <showtime>11:00 AM</showtime>
+            <showtime>2:00 PM</showtime>
+            <showtime>5:00 PM</showtime>
+        </showtimes>
+    </movie>
+    <movie>
+        <title>Parasite</title>
+        <showtimes>
+            <showtime>12:00 PM</showtime>
+            <showtime>3:00 PM</showtime>
+            <showtime>6:00 PM</showtime>
+        </showtimes>
+    </movie>
+</movies>

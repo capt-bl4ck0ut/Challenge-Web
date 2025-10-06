@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movie Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #009879;
+            color: #ffffff;
+        }
+
+        tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        @media (max-width: 600px) {
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1>Movie Schedule🍿</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Showtimes</th>
+        </tr>
+        <tr th:each="movie : ${movies}">
+            <td th:text="${movie.title}">Title</td>
+            <td>
+                <ul>
+                    <li th:each="showtime : ${movie.showtimes}" th:text="${showtime}">Showtime</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

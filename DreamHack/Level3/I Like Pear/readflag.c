@@ -9,3 +9,5 @@ int main() {
     fclose(file); 
     return 0;
 }
+
+Too many failed attempts. Please try again in 20 minutes.

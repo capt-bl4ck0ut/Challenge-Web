@@ -11,5 +11,5 @@ RUN chown -R appuser:appuser /app
 
 USER appuser
 
-EXPOSE 8080
+EXPOSE 8000
 CMD ["java", "-jar", "app.jar"]

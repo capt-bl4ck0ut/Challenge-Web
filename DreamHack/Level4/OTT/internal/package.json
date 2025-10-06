@@ -1,0 +1,16 @@
+{
+  "name": "internal",
+  "version": "1.0.0",
+  "description": "Internal service",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "xml-crypto": "5.1.0",
+    "uuid": "^9.0.0",
+    "@xmldom/xmldom": "^0.8.10",
+    "xpath": "^0.0.34"
+  }
+} 

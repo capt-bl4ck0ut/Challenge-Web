@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OTT</title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .terminal {
+            border: 1px solid #333;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+        }
+        
+        .terminal-header {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        h1 {
+            color: #00ff00;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            background: #000;
+            border: 1px solid #333;
+            color: #00ff00;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #00ff00;
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+        }
+        
+        button {
+            width: 100%;
+            background: #000;
+            border: 1px solid #333;
+            color: #00ff00;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+        }
+        
+        .status {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 10px;
+            color: #444;
+        }
+        
+        .flicker {
+            animation: flicker 2s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            █▓▒░ ACCESS POINT ░▒▓█
+        </div>
+        <h1 class="flicker">AUTHENTICATE</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="user">USER_ID:</label>
+                <input type="text" id="user" name="user" required autocomplete="off">
+            </div>
+            <button type="submit">CONNECT</button>
+        </form>
+    </div>
+    <div class="status">
+        SYS_STATUS: ONLI??NE?? | ENC: AES??-256??
+    </div>
+</body>
+</html> 

@@ -1,0 +1,18 @@
+services:
+  external:
+    build: ./external
+    ports:
+      - "8000:8000"
+    environment:
+      - FLAG=acsc{FAKE_FLAG}
+    networks:
+      - ott-net
+
+  internal:
+    build: ./internal
+    networks:
+      - ott-net
+
+networks:
+  ott-net:
+    driver: bridge 
