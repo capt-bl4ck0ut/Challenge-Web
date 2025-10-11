@@ -34,8 +34,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
             break;
         default:
             $_SESSION["auth"] = "guest";
-            header("Location: test.php");
-            
+            header("Location: test.php"); 
     }
 }
 ?>

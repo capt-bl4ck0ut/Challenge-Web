@@ -5,7 +5,7 @@ include ("./config.php");
 $pattern = '/\b(flag|nc|netcat|bin|bash|rm|sh)\b/i';
 
 if($_SESSION["auth"] === "admin"){
-
+    
     $command = isset($_GET["cmd"]) ? $_GET["cmd"] : "ls";
     $sanitized_command = str_replace("\n","",$command);
     if (preg_match($pattern, $sanitized_command)){
