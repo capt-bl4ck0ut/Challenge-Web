@@ -42,7 +42,7 @@ def escape(data):
     return data.replace("'", "\\'").replace('"', '\\"')
 
 def reset():
-    conn = manager()
+    conn = manager()    
     conn.cursor()
 
     conn.execute(f"""

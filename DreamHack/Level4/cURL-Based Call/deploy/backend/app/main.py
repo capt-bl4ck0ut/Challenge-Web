@@ -136,5 +136,5 @@ async def get_admin(request: Request):
     x_forwarded_for = request.headers.get('X-Forwarded-For')
     if x_forwarded_for != '127.0.0.1':
         return JSONResponse(status_code=401, content=None)
-
+    
     return {'message': FLAG}

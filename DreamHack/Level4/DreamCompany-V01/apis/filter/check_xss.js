@@ -4,7 +4,6 @@ const filter = (check) => {
     return true;
   }
 };
-
 module.exports = (checkInput) => {
   try {
     for (let check in checkInput) {
