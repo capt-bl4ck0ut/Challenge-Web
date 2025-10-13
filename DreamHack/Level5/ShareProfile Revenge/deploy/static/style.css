@@ -1,0 +1,95 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  margin: 0 20%;
+  padding: 0;
+}
+
+h2, p {
+  margin: 0 0 8px 0;
+}
+
+p {
+  min-width: none;
+  word-break: break-word;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #526fe3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.title-text {
+  font-size: 2.5em;
+  font-weight: bold;
+  background: linear-gradient(45deg, #a37af5 0%, #526fe3 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.profile-container {
+  flex: 1;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.profile {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.profile-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.profile-username {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.profile-description {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.ui {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  flex: 0 0 200px;
+}

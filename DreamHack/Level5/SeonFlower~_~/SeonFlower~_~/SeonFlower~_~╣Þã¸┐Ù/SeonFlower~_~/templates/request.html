@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SeonFlower~_~</title>
+</head>
+<body>
+    <div><p>{{ID}}</p></div>
+    <div>
+        <form method="post" action="/request">
+            <input type="text" name="path" placeholder="path">
+            <input type="submit" value="request!">
+        </form>
+    </div>
+    <div>
+        {% if resp %}
+            <p>{{resp}}</p>
+        {% else %}
+            <p>yet..</p>
+        {% endif %}
+</div>
+</body>
+</html>

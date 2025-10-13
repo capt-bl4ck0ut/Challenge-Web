@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShareProfile</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="title">
+    <p class="title-text">ShareProfile</p>
+  </div>
+  <main>
+    <div class="profile-container">
+      {% for profile in profiles %}
+      <div class="profile">
+        <img src="{{ profile.image }}" alt="Profile Image" class="profile-image">
+        <div class="profile-info">
+          <h2 class="profile-username">{{ profile.username }}</h2>
+          <p class="profile-description">{{ profile.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="ui">
+      {% if is_logged_in %}
+      <h2>Update Profile</h2>
+      <textarea id="updateDescription" placeholder="Description"></textarea>
+      <input type="text" id="updateImage" placeholder="Image URL">
+      <button id="updateProfileBtn">Update</button>
+      <br>
+      <p>If you notice any inappropriate content, please click the report button.</p>
+      <img src="{{ url_for('static', filename='report.svg') }}" alt="Report Button" id="reportBtn">
+      {% else %}
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button id="loginBtn">Login</button>
+      <br>
+      <h2>Register</h2>
+      <input type="text" id="regUsername" placeholder="Username">
+      <input type="password" id="regPassword" placeholder="Password">
+      <button id="registerBtn">Register</button>
+      {% endif %}
+    </div>
+  </main>
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const updateProfileBtn = document.getElementById('updateProfileBtn');
+    const reportBtn = document.getElementById('reportBtn');
+
+    loginBtn?.addEventListener('click', async () => {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        alert('Login successful!');
+        location = '/?token=' + encodeURIComponent(data.token);
+      } else {
+        alert(data.message);
+      }
+    });
+
+    registerBtn?.addEventListener('click', async () => {
+      const username = document.getElementById('regUsername').value;
+      const password = document.getElementById('regPassword').value;
+
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        alert('Registration successful! Please log in.');
+      } else {
+        alert(data.message);
+      }
+    });
+
+    updateProfileBtn?.addEventListener('click', async () => {
+      const description = document.getElementById('updateDescription').value;
+      const image = document.getElementById('updateImage').value;
+      
+      const token = (new URLSearchParams(window.location.search)).get('token');
+
+      const response = await fetch('/api/update_profile', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ description, image, token })
+      });
+      const data = await response.json();
+      if (data.status === 'success') {
+        alert('Profile updated successfully!');
+        location.reload();
+      } else {
+        alert(data.message);
+      }
+    });
+
+    reportBtn?.addEventListener('click', async () => {
+      await fetch('/api/report', {
+        method: 'POST'
+      });
+      alert('Thank you for your report. Our team will review it shortly.');
+    });
+  </script>
+</body>
+
+</html>
